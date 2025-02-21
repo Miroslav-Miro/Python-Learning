@@ -1,9 +1,14 @@
 def num_days(month):
-    if month in ["January", "March", "May", "July", "August", "October", "December"]:
+    month = month.lower()
+    
+    print(month)
+    if month in ["january", "march", "may", "july", "august", "october", "december"]:
         return 31
-    elif month in ["April", "June", "September", "November"]:
+    elif month in ["april", "june", "september", "november"]:
         return 30
-    elif month == "February":
+    elif month == "february":
         return 28
     else:
-        return None
+        return None 
+    
+print(num_days(input('Write Month: \n')))
