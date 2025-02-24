@@ -1,3 +1,8 @@
+def inventory_showcase(shop):
+    for item in shop:
+        if item != "name":
+            print(f"==[{item}], {shop[item]} gold pieces")
+
 freelancers = {
     "name": "freelancing Shop",
     "brian": 70,
@@ -15,6 +20,7 @@ antiques = {
     "german joke": 5,
 }
 pet_shop = {"name": "Pet Shop", "blue parrot": 10, "white rabbit": 5, "newt": 2}
+
 player = {"inventory": [], "gold": 1000}
 bill = 0
 
@@ -28,9 +34,7 @@ for shop in (freelancers, antiques, pet_shop):
     print()
     print("We have the following items for sale:")
     print(f"Your inventory: {player['inventory']}")
-    for item in shop:
-        if item != "name":
-            print(f"==[{item}], {shop[item]} gold pieces")
+    inventory_showcase(shop)
     while True:
         picked_item = input("Choose 1 item to buy or type EXIT to leave the shop: ")
         picked_item = picked_item.lower()
@@ -41,9 +45,7 @@ for shop in (freelancers, antiques, pet_shop):
         elif picked_item not in shop or picked_item == "name":
             print("Sorry, we do not have that item")
             print()
-            for item in shop:
-                if item != "name":
-                    print(f"==[{item}], {shop[item]} gold pieces")
+            inventory_showcase(shop)
         else:
             player["inventory"].append(picked_item)
             player["gold"] -= abs(shop[picked_item])
