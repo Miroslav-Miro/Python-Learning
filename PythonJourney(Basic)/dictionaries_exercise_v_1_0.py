@@ -21,10 +21,14 @@ antiques = {
 }
 pet_shop = {"name": "Pet Shop", "blue parrot": 10, "white rabbit": 5, "newt": 2}
 
+# player's inventory and gold
 player = {"inventory": [], "gold": 1000}
+# total cost of the items bought
 bill = 0
 
 freelancers = {k.lower(): v for k, v in freelancers.items()}
+antiques = {k.lower(): v for k, v in freelancers.items()}
+pet_shop = {k.lower(): v for k, v in freelancers.items()}
 
 # go in SHOP and buy 1 item
 # add itema to player's inventory
@@ -34,26 +38,37 @@ for shop in (freelancers, antiques, pet_shop):
     print()
     print("We have the following items for sale:")
     print(f"Your inventory: {player['inventory']}")
+    
+    # function to show all items in the shop
     inventory_showcase(shop)
     while True:
+        # take input from the player
         picked_item = input("Choose 1 item to buy or type EXIT to leave the shop: ")
         picked_item = picked_item.lower()
+        
         if picked_item == "exit":
+            # exit the shop
             print(f"You exited the {shop_name}")
             print()
             break
         elif picked_item not in shop or picked_item == "name":
+            # if the item is not in the shop
             print("Sorry, we do not have that item")
             print()
+            # function to show all items in the shop
             inventory_showcase(shop)
         else:
+            # add the item to the player's inventory and remove the gold
             player["inventory"].append(picked_item)
             player["gold"] -= abs(shop[picked_item])
             bill += abs(shop[picked_item])
+            
+            # print the item and the price
             print(f"You purchased {picked_item.upper()} for {shop[picked_item]} gold pieces")
             shop.pop(picked_item)
             break
 
+# print the items that the player bought and the total cost
 if len(player["inventory"]) > 0:
     print(f'You purchased the following items: \n{"\n".join(player["inventory"])}')
     print(f"Total cost {bill} gold pieces.")
